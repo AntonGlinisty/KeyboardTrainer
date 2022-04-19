@@ -190,10 +190,17 @@ def DictOfCords(surface_ycord, surf_xcord, surf_ycord):
               surf_xcord // 15 * 1.5, surf_ycord // 5),
         '\\': (surf_xcord // 15 * 0.5 + surf_xcord // 15 * 13, surface_ycord - surf_ycord // 5 * 4,
                surf_xcord // 15 * 1.5, surf_ycord // 5),
-        'Enter': (surf_xcord // 15 * 13, surface_ycord - surf_ycord // 5 * 3,
-                  surf_xcord // 15 * 2, surf_ycord // 5),
-        'Space': (surf_xcord // 3, surface_ycord - surf_ycord // 5 * 1,
-                  surf_xcord // 3, surf_ycord // 5)
+        'Enter': (surf_xcord // 15 * 13, surface_ycord - surf_ycord // 5 * 3, surf_xcord // 15 * 2, surf_ycord // 5),
+        'Space': (surf_xcord // 3, surface_ycord - surf_ycord // 5 * 1, surf_xcord // 3, surf_ycord // 5),
+        'LCtrl': (0, surface_ycord - surf_ycord // 5 * 1, surf_xcord // 9, surf_ycord // 5),
+        'LShift': (0, surface_ycord - surf_ycord // 5 * 2, surf_xcord // 15 * 2.5, surf_ycord // 5),
+        'Caps Lock': (0, surface_ycord - surf_ycord // 5 * 3, surf_xcord // 15 * 2, surf_ycord // 5),
+        'Tab': (0, surface_ycord - surf_ycord // 5 * 4, surf_xcord // 15 * 1.5, surf_ycord // 5),
+        'Alt': (surf_xcord // 9 * 2, surface_ycord - surf_ycord // 5 * 1, surf_xcord // 9, surf_ycord // 5),
+        'AltGr': (surf_xcord // 9 * 6, surface_ycord - surf_ycord // 5 * 1, surf_xcord // 9, surf_ycord // 5),
+        'RCtrl': (surf_xcord // 9 * 8, surface_ycord - surf_ycord // 5 * 1, surf_xcord // 9, surf_ycord // 5),
+        'RShift': (surf_xcord // 15 * 12.5, surface_ycord - surf_ycord // 5 * 2, surf_xcord // 6, surf_ycord // 5),
+        'Backspace': (surf_xcord // 15 * 13, surface_ycord - surf_ycord // 5 * 5, surf_xcord // 15 * 2, surf_ycord // 5)
 
     }
     return dict

@@ -17,10 +17,21 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GRAY = (125, 125, 125)
 LIGHT_BLUE = (64, 128, 255)
-GREEN = (0, 200, 64)
+GREEN = (0, 230, 0)
 YELLOW = (225, 225, 0)
 PINK = (230, 50, 230)
 RED = (255, 0, 0)
+color0 = (0, 200, 0)
+color1 = (20, 160, 0)
+color2 = (40, 120, 0)
+color3 = (80, 80, 0)
+color4 = (100, 40, 0)
+color5 = (125, 0, 0)
+color6 = (150, 0, 0)
+color7 = (175, 0, 0)
+color8 = (200, 0, 0)
+color9 = (225, 0, 0)
+color10 = (255, 0, 0)
 
 pygame.init()
 game_folder = os.path.dirname(__file__)
@@ -39,7 +50,7 @@ indent2 = 18
 left_line_size = 4
 right_line_size = 7
 up_line_size = down_line_size = 3
-running = condition = marker1 = marker2 = marker3 = marker4 = marker5 = marker6 = True
+running = condition = marker1 = marker2 = marker3 = marker4 = marker5 = marker6 = marker7 = True
 counter1 = counter2 = mistakes = condition_counter = lines_counter = letter_counter = word_counter = width = 0
 timelist = []
 clock = pygame.time.Clock()
@@ -185,6 +196,7 @@ if marker6 == False:
     while running:
         clock.tick(FPS)
         if counter2 == len(list):
+            marker7 = False
             running = False
         if marker2:
             if list[counter2] == 'Enter':
@@ -197,10 +209,12 @@ if marker6 == False:
             hot_dict[letter] = 0
         if marker1:
             KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[letter], GREEN, surface)
+            marker1 = False
         KeyboardDrawer(surface, surface_xcord, surface_ycord, surf_xcord, surf_ycord, BLACK, indent1, indent2,
                        kwc, khc, surf_info_cordy, surf_input_cordy, surf_text_cordy)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                marker7 = False
                 running = False
             if event.type == pygame.KEYDOWN:
                 condition = PrinterSearcher(event, letter)
@@ -237,4 +251,51 @@ if marker6 == False:
         pygame.display.update()
     sorted_tuples = sorted(hot_dict.items(), key=lambda item: item[1])
     sorted_dict = {k: v for k, v in sorted_tuples[::-1] if v > 0}
-    print('Heatmap list : ', sorted_dict)
+    print('Heatmap dict : ', sorted_dict)
+
+
+running = True
+imp_dict = DictOfCords(surface_ycord, surf_xcord, surf_ycord)
+marker8 = True
+
+rock = pygame.image.load(os.path.join(img_folder, 'rock.jpg'))
+rock = pygame.transform.scale(rock, (surface_xcord, surf_info_cordy + surf_input_cordy + surf_text_cordy))
+surface.blit(rock, (0, 0))
+
+if marker7 == False:
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+        if marker8:
+            for letter in imp_dict.keys():
+                if letter not in hot_dict.keys():
+                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[letter], color0, surface)
+            for key, value in hot_dict.items():
+                if value == 0:
+                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color0, surface)
+                if value == 1:
+                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color1, surface)
+                if value == 2:
+                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color2, surface)
+                if value == 3:
+                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color3, surface)
+                if value == 4:
+                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color4, surface)
+                if value == 5:
+                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color5, surface)
+                if value == 6:
+                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color6, surface)
+                if value == 7:
+                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color7, surface)
+                if value == 8:
+                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color8, surface)
+                if value == 9:
+                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color9, surface)
+                if value >= 10:
+                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color10, surface)
+            KeyboardDrawer(surface, surface_xcord, surface_ycord, surf_xcord, surf_ycord, BLACK, indent1, indent2,
+                           kwc, khc, surf_info_cordy, surf_input_cordy, surf_text_cordy)
+            marker8 = False
+        clock.tick(FPS)
+        pygame.display.update()
