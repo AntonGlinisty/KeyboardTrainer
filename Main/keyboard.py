@@ -50,7 +50,8 @@ indent2 = 18
 left_line_size = 4
 right_line_size = 7
 up_line_size = down_line_size = 3
-running = condition = marker1 = marker2 = marker3 = marker4 = marker5 = marker6 = marker7 = True
+running = marker1 = marker2 = marker3 = marker4 = marker5 = marker6 = marker7 = True
+condition = 3
 counter1 = counter2 = mistakes = condition_counter = lines_counter = letter_counter = word_counter = width = 0
 timelist = []
 clock = pygame.time.Clock()
@@ -193,6 +194,8 @@ if marker6 == False:
     TextViewer(list, BLACK, surface, surf_text_cordx, surf_info_cordy, surf_input_cordy, surf_text_cordy, indent1, 0,
                WHITE, string_scroller)
 
+    listofpassed = []
+
     while running:
         clock.tick(FPS)
         if counter2 == len(list):
@@ -205,13 +208,18 @@ if marker6 == False:
                 letter = list[counter2][counter1]
         else:
             letter = 'Space'
+        if len(listofpassed) == 0:
+            listofpassed.append(letter)
+        if listofpassed[len(listofpassed) - 1] != letter:
+            listofpassed.append(letter)
         if letter not in hot_dict:
             hot_dict[letter] = 0
         if marker1:
+            KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[listofpassed[len(listofpassed) - 2]],
+                            WHITE, surface)
             KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[letter], GREEN, surface)
             marker1 = False
-        KeyboardDrawer(surface, surface_xcord, surface_ycord, surf_xcord, surf_ycord, BLACK, indent1, indent2,
-                       kwc, khc, surf_info_cordy, surf_input_cordy, surf_text_cordy)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 marker7 = False
@@ -220,7 +228,7 @@ if marker6 == False:
                 condition = PrinterSearcher(event, letter)
                 width, listoftw = PersonInput(width, event, surface, WHITE, listoftw, BLACK, condition,
                                               indent1, surf_info_cordy)
-                if condition == True:
+                if condition == 3:
                     condition_counter += 1
                     if marker1 == False:
                         marker1 = True
@@ -234,10 +242,14 @@ if marker6 == False:
                         marker2 = False
                     else:
                         counter1 += 1
+                    KeyboardPainter( DictOfCords(surface_ycord, surf_xcord, surf_ycord)
+                                     [listofpassed[len(listofpassed) - 2]], WHITE, surface)
                     KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[letter], WHITE, surface)
-                if condition == False:
+                if condition == 1:
                     hot_dict[letter] += 1
                     mistakes += 1
+                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)
+                                    [listofpassed[len(listofpassed) - 2]], WHITE, surface)
                     KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[letter], RED, surface)
                     marker1 = False
         if lines_counter >= string_scroller:
@@ -248,11 +260,12 @@ if marker6 == False:
             width = 0
         timelist, marker4 = Info(start_time, surface, WHITE, surf_info_cordx, surf_info_cordy, word_counter,
                                  condition_counter, indent1, indent4, mistakes, marker4, timelist, BLACK, surface_xcord)
+        KeyboardDrawer(surface, surface_xcord, surface_ycord, surf_xcord, surf_ycord, BLACK, indent1, indent2,
+                       kwc, khc, surf_info_cordy, surf_input_cordy, surf_text_cordy)
         pygame.display.update()
     sorted_tuples = sorted(hot_dict.items(), key=lambda item: item[1])
     sorted_dict = {k: v for k, v in sorted_tuples[::-1] if v > 0}
     print('Heatmap dict : ', sorted_dict)
-
 
 running = True
 imp_dict = DictOfCords(surface_ycord, surf_xcord, surf_ycord)
