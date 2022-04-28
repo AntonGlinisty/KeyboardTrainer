@@ -1,6 +1,9 @@
 import pygame
 
 def ListOfSymbols(text):
+
+    """func reads the text from a file"""
+
     list = []
     with open(text + '.txt', 'r+', encoding='utf_8') as file:
         for line in file.readlines():
@@ -12,6 +15,9 @@ def ListOfSymbols(text):
 
 def TextViewer(list, BLACK, surface, surf_text_cordx, surf_info_cordy, surf_input_cordy,
                surf_text_cordy, indent1, word_counter, WHITE, string_scroller):
+
+    """func puts part of the text on the screen"""
+
     pygame.draw.rect(surface, WHITE, [0 + 3, surf_info_cordy + surf_input_cordy + 3,
                                       surf_text_cordx - 6, surf_text_cordy - 6])
     L1 = pygame.font.SysFont('verdana', 18)

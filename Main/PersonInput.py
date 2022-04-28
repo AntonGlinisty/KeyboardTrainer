@@ -1,6 +1,9 @@
 import pygame
 
 def PrinterSearcher(event, letter):
+
+    """func checks the correspondence of symbols"""
+
     if event.key not in [pygame.K_LSHIFT, pygame.K_RSHIFT, pygame.K_TAB, pygame.K_CAPSLOCK, pygame.K_LCTRL,
                     pygame.K_RCTRL, pygame.K_LALT, pygame.K_RALT, pygame.K_PRINTSCREEN] and ord(event.unicode) > 1000:
         return 1
@@ -76,13 +79,10 @@ def PrinterSearcher(event, letter):
             return 1
 
 def PersonInput(width, event, surface, WHITE, listoftw, BLACK, condition, indent1, surf_info_cordy):
-    if condition == 3:
-        if event.key == pygame.K_BACKSPACE:
-            pygame.draw.rect(surface, WHITE, (width + indent1 - listoftw[len(listoftw) - 1],
-                                              surf_info_cordy + 20, 50, 30))
 
-            width -= listoftw[len(listoftw) - 1]
-            listoftw.pop()
+    """func accepts user input"""
+
+    if condition == 3:
         if condition == 2 or condition == 3:
             letter = event.unicode
             L1 = pygame.font.SysFont('verdana', 18)

@@ -2,6 +2,9 @@ import pygame
 
 def BordersDrawer(surface, BLACK, surf_info_cordx, surf_input_cordx, surf_text_cordx, surf_info_cordy,
                   surf_input_cordy, surf_text_cordy, left_line_size, right_line_size, up_line_size, down_line_size, RED):
+
+    """func draws the boundaries of areas on the screen"""
+
     pygame.draw.line(surface, BLACK, [0, 0], [0, surf_info_cordy], left_line_size)
     pygame.draw.line(surface, BLACK, [surf_info_cordx, 0],
                      [surf_info_cordx, surf_info_cordy], right_line_size)

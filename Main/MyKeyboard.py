@@ -3,39 +3,43 @@ import pygame
 
 def LineDrawer(surface, surface_xcord, surface_ycord, surf_xcord, surf_ycord, BLACK, kwc, khc, surf_info_cordy,
                surf_input_cordy, surf_text_cordy):
-    for i in range(4):
-        pygame.draw.line(surface, BLACK, [0, surface_ycord - (surf_ycord // khc) * (i + 1)],
-                         [surface_xcord, surface_ycord - (surf_ycord // khc) * (i + 1)], 1)
-    for i in range(13):
-        pygame.draw.line(surface, BLACK, [surf_xcord // kwc * (i + 1), surface_ycord - surf_ycord],
-                         [surf_xcord // kwc * (i + 1), surface_ycord - surf_ycord // 5 * 4], 1)
-    for i in range(13):
-        pygame.draw.line(surface, BLACK, [surf_xcord // kwc * 0.5 + surf_xcord // kwc * (i + 1),
-                    surface_ycord - surf_ycord // khc * 4], [surf_xcord // kwc * 0.5 + surf_xcord // kwc * (i + 1),
-                                                             surface_ycord - surf_ycord // khc * 3], 1)
-    for i in range(12):
-        pygame.draw.line(surface, BLACK, [surf_xcord // kwc + surf_xcord // kwc * (i + 1),
-                    surface_ycord - surf_ycord // khc * 3], [surf_xcord // kwc + surf_xcord // kwc * (i + 1),
-                                                                        surface_ycord - surf_ycord // khc * 2], 1)
-    for i in range(11):
-        pygame.draw.line(surface, BLACK, [surf_xcord // kwc * 1.5 + surf_xcord // kwc * (i + 1),
-                        surface_ycord - surf_ycord // khc * 2],[surf_xcord // kwc * 1.5 + surf_xcord // kwc * (i + 1),
-                                                                surface_ycord - surf_ycord // khc * 1], 1)
 
+    """func draws lines for keyboard frame"""
+
+    for linenumb in range(4):
+        pygame.draw.line(surface, BLACK, [0, surface_ycord - (surf_ycord // khc) * (linenumb + 1)],
+                         [surface_xcord, surface_ycord - (surf_ycord // khc) * (linenumb + 1)], 1)
+    for linenumb in range(13):
+        pygame.draw.line(surface, BLACK, [surf_xcord // kwc * (linenumb + 1), surface_ycord - surf_ycord],
+                         [surf_xcord // kwc * (linenumb + 1), surface_ycord - surf_ycord // 5 * 4], 1)
+    for linenumb in range(13):
+        pygame.draw.line(surface, BLACK, [surf_xcord // kwc * 0.5 + surf_xcord // kwc * (linenumb + 1),
+                    surface_ycord - surf_ycord // khc * 4], [surf_xcord // kwc * 0.5 + surf_xcord // kwc *
+                                                             (linenumb + 1), surface_ycord - surf_ycord // khc * 3], 1)
+    for linenumb in range(12):
+        pygame.draw.line(surface, BLACK, [surf_xcord // kwc + surf_xcord // kwc * (linenumb + 1),
+                    surface_ycord - surf_ycord // khc * 3], [surf_xcord // kwc + surf_xcord // kwc * (linenumb + 1),
+                                                                        surface_ycord - surf_ycord // khc * 2], 1)
+    for linenumb in range(11):
+        pygame.draw.line(surface, BLACK, [surf_xcord // kwc * 1.5 + surf_xcord // kwc * (linenumb + 1),
+                        surface_ycord - surf_ycord // khc * 2], [surf_xcord // kwc * 1.5 + surf_xcord // kwc *
+                                                                 (linenumb + 1), surface_ycord - surf_ycord // khc * 1], 1)
     pygame.draw.line(surface, BLACK, [surf_xcord // kwc * 5, surface_ycord - surf_ycord // khc],
                      [surf_xcord // kwc * 5,surface_ycord])
     pygame.draw.line(surface, BLACK, [surf_xcord // kwc * 10, surface_ycord - surf_ycord // khc],
                      [surf_xcord // kwc * 10, surface_ycord])
-    for i in range(2):
-        pygame.draw.line(surface, BLACK, [surf_xcord // 3 // 3 * (i + 1), surface_ycord - surf_ycord // 5],
-                         [surf_xcord // 3 // 3 * (i + 1), surface_ycord], 1)
-        pygame.draw.line(surface, BLACK, [surface_xcord - surf_xcord // 9 * (i + 1), surface_ycord - surf_ycord // 5],
-                         [surface_xcord - surf_xcord // 3 // 3 * (i + 1), surface_ycord], 1)
+    for linenumb in range(2):
+        pygame.draw.line(surface, BLACK, [surf_xcord // 3 // 3 * (linenumb + 1), surface_ycord - surf_ycord // 5],
+                         [surf_xcord // 3 // 3 * (linenumb + 1), surface_ycord], 1)
+        pygame.draw.line(surface, BLACK, [surface_xcord - surf_xcord // 9 * (linenumb + 1), surface_ycord - surf_ycord // 5],
+                         [surface_xcord - surf_xcord // 3 // 3 * (linenumb + 1), surface_ycord], 1)
     pygame.draw.rect(surface, BLACK, (0, surf_info_cordy + surf_input_cordy + surf_text_cordy,
                                       surf_xcord, surf_ycord), 3)
 
-
 def DictOfSymbols(BLACK):
+
+    """func returns a dict with keyboard letters in values"""
+
     L1 = pygame.font.SysFont('arial', 25)
     dict = {
         'text1': L1.render('Q', True, (BLACK)), 'text2': L1.render('q', True, (BLACK)),
@@ -99,34 +103,30 @@ def DictOfSymbols(BLACK):
     }
     return dict
 
-
 def RusSymbolsDrawer(dict, surf_xcord, surface_ycord, surf_ycord, indent1, indent2, kwc, khc, surface):
-    for i in range(12):
-        surface.blit(dict['text' + str((i + 1) * 2 - 1)], (surf_xcord // kwc * 0.5 + surf_xcord // kwc * (i + 1) +
-                                                           indent1, surface_ycord - surf_ycord // khc * 4 + indent1))
-        surface.blit(dict['text' + str((i + 1) * 2)], (surf_xcord // kwc * 1.5 + surf_xcord // kwc * (i + 1) -
-                                                       indent2, surface_ycord - surf_ycord // khc * 3 - indent2 * 2))
-    for i in range(11):
-        surface.blit(dict['text' + str((12 + i + 1) * 2 - 1)], (surf_xcord // kwc * 1 + surf_xcord // kwc * (i + 1) +
-                                                                indent1,
-                                                                surface_ycord - surf_ycord // khc * 3 + indent1))
-        surface.blit(dict['text' + str((12 + i + 1) * 2)], (surf_xcord // kwc * 2 + surf_xcord // kwc *
-                                                            (i + 1) - indent2,
-                                                            surface_ycord - surf_ycord // khc * 2 - indent2 * 2))
-    for i in range(10):
-        surface.blit(dict['text' + str((23 + i + 1) * 2 - 1)], (surf_xcord // kwc * 1.5 + surf_xcord //
-                                                                kwc * (i + 1) + indent1,
-                                                                surface_ycord - surf_ycord // khc * 2 + indent1))
-        surface.blit(dict['text' + str((23 + i + 1) * 2)], (surf_xcord // kwc * 2.5 + surf_xcord //
-                                                            kwc * (i + 1) - indent2,
-                                                            surface_ycord - surf_ycord // khc * 1 - indent2 * 2))
-    for i in range(13):
-        surface.blit(dict['text' + str((33 + i + 1) * 2 - 1)], (surf_xcord // kwc * (-1) + surf_xcord //
-                                                                kwc * (i + 1) + indent1,
-                                                                surface_ycord - surf_ycord // khc * 5 + indent1))
-        surface.blit(dict['text' + str((33 + i + 1) * 2)], (surf_xcord // kwc * 0 + surf_xcord //
-                                                            kwc * (i + 1) - indent2,
-                                                            surface_ycord - surf_ycord // khc * 4 - indent2 * 2))
+
+    """func draws letters in right places on the keyboard"""
+
+    for letnumb in range(12):
+        surface.blit(dict['text' + str((letnumb + 1) * 2 - 1)], (surf_xcord // kwc * 0.5 + surf_xcord // kwc *
+                                            (letnumb + 1) + indent1, surface_ycord - surf_ycord // khc * 4 + indent1))
+        surface.blit(dict['text' + str((letnumb + 1) * 2)], (surf_xcord // kwc * 1.5 + surf_xcord // kwc *
+                                       (letnumb + 1) - indent2, surface_ycord - surf_ycord // khc * 3 - indent2 * 2))
+    for letnumb in range(11):
+        surface.blit(dict['text' + str((12 + letnumb + 1) * 2 - 1)], (surf_xcord // kwc * 1 + surf_xcord // kwc *
+                                            (letnumb + 1) + indent1, surface_ycord - surf_ycord // khc * 3 + indent1))
+        surface.blit(dict['text' + str((12 + letnumb + 1) * 2)], (surf_xcord // kwc * 2 + surf_xcord // kwc *
+                                        (letnumb + 1) - indent2, surface_ycord - surf_ycord // khc * 2 - indent2 * 2))
+    for letnumb in range(10):
+        surface.blit(dict['text' + str((23 + letnumb + 1) * 2 - 1)], (surf_xcord // kwc * 1.5 + surf_xcord //
+                                        kwc * (letnumb + 1) + indent1, surface_ycord - surf_ycord // khc * 2 + indent1))
+        surface.blit(dict['text' + str((23 + letnumb + 1) * 2)], (surf_xcord // kwc * 2.5 + surf_xcord //
+                                    kwc * (letnumb + 1) - indent2, surface_ycord - surf_ycord // khc * 1 - indent2 * 2))
+    for letnumb in range(13):
+        surface.blit(dict['text' + str((33 + letnumb + 1) * 2 - 1)], (surf_xcord // kwc * (-1) + surf_xcord //
+                                        kwc * (letnumb + 1) + indent1, surface_ycord - surf_ycord // khc * 5 + indent1))
+        surface.blit(dict['text' + str((33 + letnumb + 1) * 2)], (surf_xcord // kwc * 0 + surf_xcord //
+                                    kwc * (letnumb + 1) - indent2, surface_ycord - surf_ycord // khc * 4 - indent2 * 2))
     surface.blit(dict['text' + str(93)], (surf_xcord / 100 * 3.5, surface_ycord - surf_ycord // khc * 4 + 18))
     surface.blit(dict['text' + str(94)], (surf_xcord / 60 * 1.1, surface_ycord - surf_ycord // khc * 3 + 18))
     surface.blit(dict['text' + str(95)], (surf_xcord / 18 * 1.1, surface_ycord - surf_ycord // khc * 2 + 18))
@@ -142,9 +142,11 @@ def RusSymbolsDrawer(dict, surf_xcord, surface_ycord, surf_ycord, indent1, inden
     surface.blit(dict['text' + str(104)], (surf_xcord - indent2, surface_ycord - surf_ycord // khc * 3 - indent2 * 2))
     surface.blit(dict['text' + str(105)], (surf_xcord / kwc * 6.9, surface_ycord - surf_ycord // khc * 1 + 15))
 
-
 def KeyboardDrawer(surface, surface_xcord, surface_ycord, surf_xcord, surf_ycord, BLACK, indent1, indent2,
                    keys_width_counter, keys_height_counter, surf_info_cordy, surf_input_cordy, surf_text_cordy):
+
+    """func draws all the keyboard completely"""
+
     LineDrawer(surface, surface_xcord, surface_ycord, surf_xcord, surf_ycord, BLACK,
                keys_width_counter, keys_height_counter, surf_info_cordy, surf_input_cordy, surf_text_cordy)
     dict = DictOfSymbols(BLACK)

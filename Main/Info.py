@@ -1,11 +1,14 @@
 import pygame
+
 from datetime import datetime
 
 def Info(time, surface, WHITE, surf_info_cordx, surf_info_cordy, word_counter, condition_counter, indent1,
          indent4, mistakes, marker4, a, BLACK, surface_xcord):
+
+    """func displays all statistics in the corresponding area"""
+
     pygame.draw.rect(surface, WHITE, [0 + 3, 3, surf_info_cordx - 6, surf_info_cordy - 6])
     L1 = pygame.font.SysFont('calibri', 20)
-    L2 = pygame.font.SysFont('calibri', 17)
     if marker4:
         f = open('stats.txt', 'r+')
         for lines in f:

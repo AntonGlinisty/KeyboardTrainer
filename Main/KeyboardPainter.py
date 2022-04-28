@@ -1,6 +1,9 @@
 import pygame
 
 def DictOfCords(surface_ycord, surf_xcord, surf_ycord):
+
+    """func returns a dict with buttons coordinates in values"""
+
     dict = {
         'Q': (surf_xcord // 15 * 0.5 + surf_xcord // 15 * 1, surface_ycord - surf_ycord // 5 * 4,
               surf_xcord // 15, surf_ycord // 5),
@@ -206,4 +209,7 @@ def DictOfCords(surface_ycord, surf_xcord, surf_ycord):
     return dict
 
 def KeyboardPainter(tuple, color, surface):
+
+    """func paints the right button in the right color"""
+
     pygame.draw.rect(surface, color, tuple)
