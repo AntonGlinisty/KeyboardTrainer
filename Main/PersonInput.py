@@ -6,7 +6,7 @@ def PrinterSearcher(event, letter):
 
     if event.key not in [pygame.K_LSHIFT, pygame.K_RSHIFT, pygame.K_TAB, pygame.K_CAPSLOCK, pygame.K_LCTRL,
                     pygame.K_RCTRL, pygame.K_LALT, pygame.K_RALT, pygame.K_PRINTSCREEN] and ord(event.unicode) > 1000:
-        return 1
+        return 'mistake'
     if pygame.key.get_mods() == 4097 or pygame.key.get_mods() == 12288:
         if (event.key == pygame.K_q and letter == 'Q' or event.key == pygame.K_w and letter == 'W' or
                 event.key == pygame.K_e and letter == 'E' or event.key == pygame.K_r and letter == 'R' or
@@ -36,12 +36,12 @@ def PrinterSearcher(event, letter):
                 event.key == pygame.K_BACKSLASH and letter == '|' or
                 event.key == pygame.K_SPACE and letter == 'Space' or
                 event.key == pygame.K_RETURN and letter == 'Enter'):
-            return 3
+            return 'correct'
         elif event.key in [pygame.K_LSHIFT, pygame.K_RSHIFT, pygame.K_TAB, pygame.K_CAPSLOCK, pygame.K_LCTRL,
                            pygame.K_RCTRL, pygame.K_LALT, pygame.K_RALT]:
-            return 2
+            return 'unknown'
         else:
-            return 1
+            return 'mistake'
     if pygame.key.get_mods() == 4096 or pygame.key.get_mods() == 12289:
         if (event.key == pygame.K_q and letter == 'q' or event.key == pygame.K_w and letter == 'w' or
                 event.key == pygame.K_e and letter == 'e' or event.key == pygame.K_r and letter == 'r' or
@@ -71,23 +71,23 @@ def PrinterSearcher(event, letter):
                 event.key == pygame.K_BACKSLASH and letter == '\\' or
                 event.key == pygame.K_SPACE and letter == 'Space' or
                 event.key == pygame.K_RETURN and letter == 'Enter'):
-            return 3
+            return 'correct'
         elif event.key in [pygame.K_LSHIFT, pygame.K_RSHIFT, pygame.K_TAB, pygame.K_CAPSLOCK, pygame.K_LCTRL,
                            pygame.K_RCTRL, pygame.K_LALT, pygame.K_RALT]:
-            return 2
+            return 'unknown'
         else:
-            return 1
+            return 'mistake'
 
-def PersonInput(width, event, surface, WHITE, listoftw, BLACK, condition, indent1, surf_info_cordy):
+def PersonInput(width, event, surface, WHITE, listoftw, BLACK, condition, indent1, surf_info_cordy, textsize, indent):
 
     """func accepts user input"""
 
-    if condition == 3:
-        if condition == 2 or condition == 3:
+    if condition == 'correct':
+        if condition == 'unknown' or condition == 'correct':
             letter = event.unicode
-            L1 = pygame.font.SysFont('verdana', 18)
+            L1 = pygame.font.SysFont('verdana', textsize)
             text1 = L1.render(letter, True, (BLACK))
-            surface.blit(text1, (width + indent1, surf_info_cordy + 15))
+            surface.blit(text1, (width + indent1, surf_info_cordy + indent))
             width += text1.get_width()
             listoftw.append(text1.get_width())
     return width, listoftw

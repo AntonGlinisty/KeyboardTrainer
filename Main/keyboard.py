@@ -37,21 +37,22 @@ pygame.init()
 game_folder = os.path.dirname(__file__)
 img_folder = os.path.join(game_folder, 'images')
 
-surface_cordx = 1053
+surface_cordx = 1035
 surface_cordy = 700
-surface_xcord = 1053
+surface_xcord = 1035
 surface_ycord = 700
 surface = pygame.display.set_mode((surface_cordx, surface_cordy))
 
 filewithtext = 'text1'
 indent1 = 5
 indent2 = 18
+indent3 = 15
 
 left_line_size = 4
 right_line_size = 7
 up_line_size = down_line_size = 3
 running = marker1 = marker2 = marker3 = marker4 = marker5 = marker6 = marker7 = True
-condition = 3
+condition = 'correct'
 counter1 = counter2 = mistakes = condition_counter = lines_counter = letter_counter = word_counter = width = 0
 timelist = []
 clock = pygame.time.Clock()
@@ -62,6 +63,7 @@ start_time = datetime.now()
 kwc = 15
 khc = 5
 hot_dict = {}
+ex_text_size = 18
 
 fon = pygame.image.load(os.path.join(img_folder, 'fon2.jpg'))
 fon = pygame.transform.scale(fon, (surface_cordx, surface_cordy))
@@ -148,7 +150,7 @@ while running:
             if surface_cordx / 21 * 2 < event.pos[0] < surface_cordx / 21 * 2 + surface_cordy / 14 * 2.5 and \
                     surface_cordy / 70 * 29.5 < event.pos[1] < surface_cordy / 70 * 29.5 + surface_cordy / 14 * 2.5 and \
                     marker1 == False:
-                surface_xcord = 1053
+                surface_xcord = 1035
                 surface_ycord = 700
                 string_scroller = 85
             if surface_cordx / 21 * 2 < event.pos[0] < surface_cordx / 21 * 2 + surface_cordy / 14 * 2.5 and \
@@ -192,7 +194,7 @@ if marker6 == False:
     list = ListOfSymbols(filewithtext)
 
     TextViewer(list, BLACK, surface, surf_text_cordx, surf_info_cordy, surf_input_cordy, surf_text_cordy, indent1, 0,
-               WHITE, string_scroller)
+               WHITE, string_scroller, ex_text_size)
 
     listofpassed = []
 
@@ -227,8 +229,8 @@ if marker6 == False:
             if event.type == pygame.KEYDOWN:
                 condition = PrinterSearcher(event, letter)
                 width, listoftw = PersonInput(width, event, surface, WHITE, listoftw, BLACK, condition,
-                                              indent1, surf_info_cordy)
-                if condition == 3:
+                                              indent1, surf_info_cordy, ex_text_size, indent3)
+                if condition == 'correct':
                     condition_counter += 1
                     if marker1 == False:
                         marker1 = True
@@ -245,7 +247,7 @@ if marker6 == False:
                     KeyboardPainter( DictOfCords(surface_ycord, surf_xcord, surf_ycord)
                                      [listofpassed[len(listofpassed) - 2]], WHITE, surface)
                     KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[letter], WHITE, surface)
-                if condition == 1:
+                if condition == 'mistake':
                     hot_dict[letter] += 1
                     mistakes += 1
                     KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)
@@ -255,7 +257,7 @@ if marker6 == False:
         if lines_counter >= string_scroller:
             lines_counter = 0
             TextViewer(list, BLACK, surface, surf_text_cordx, surf_info_cordy, surf_input_cordy, surf_text_cordy,
-                       indent1, word_counter, WHITE, string_scroller)
+                       indent1, word_counter, WHITE, string_scroller, ex_text_size)
             pygame.draw.rect(surface, WHITE, (0 + 3, surf_info_cordy + 3, surf_input_cordx - 6, surf_input_cordy - 6))
             width = 0
         timelist, marker4 = Info(start_time, surface, WHITE, surf_info_cordx, surf_info_cordy, word_counter,

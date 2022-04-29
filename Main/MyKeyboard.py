@@ -1,40 +1,30 @@
 import pygame
+from MainFieldLines import LinesDrawer
 
 
-def LineDrawer(surface, surface_xcord, surface_ycord, surf_xcord, surf_ycord, BLACK, kwc, khc, surf_info_cordy,
-               surf_input_cordy, surf_text_cordy):
+def FrameDrawer(sce, sce_X, sce_Y, sf_X, sf_Y, BLACK, kwc, khc, sf_inf_Y, sf_inp_Y, sf_txt_Y):
 
     """func draws lines for keyboard frame"""
 
+    sz_Y = sf_Y // khc
+    sz_X = sf_X // kwc
     for linenumb in range(4):
-        pygame.draw.line(surface, BLACK, [0, surface_ycord - (surf_ycord // khc) * (linenumb + 1)],
-                         [surface_xcord, surface_ycord - (surf_ycord // khc) * (linenumb + 1)], 1)
+        LinesDrawer(sce, BLACK, 0, sce_Y - sz_Y * (linenumb + 1), sce_X, sce_Y - sz_Y * (linenumb + 1), 1)
     for linenumb in range(13):
-        pygame.draw.line(surface, BLACK, [surf_xcord // kwc * (linenumb + 1), surface_ycord - surf_ycord],
-                         [surf_xcord // kwc * (linenumb + 1), surface_ycord - surf_ycord // 5 * 4], 1)
+        LinesDrawer(sce, BLACK, sz_X * (linenumb + 1), sce_Y - sf_Y, sz_X * (linenumb + 1), sce_Y - sf_Y // 5 * 4, 1)
     for linenumb in range(13):
-        pygame.draw.line(surface, BLACK, [surf_xcord // kwc * 0.5 + surf_xcord // kwc * (linenumb + 1),
-                    surface_ycord - surf_ycord // khc * 4], [surf_xcord // kwc * 0.5 + surf_xcord // kwc *
-                                                             (linenumb + 1), surface_ycord - surf_ycord // khc * 3], 1)
+        LinesDrawer(sce, BLACK, sz_X * (linenumb + 1.5), sce_Y - sz_Y * 4, sz_X * (linenumb + 1.5), sce_Y - sz_Y * 3, 1)
     for linenumb in range(12):
-        pygame.draw.line(surface, BLACK, [surf_xcord // kwc + surf_xcord // kwc * (linenumb + 1),
-                    surface_ycord - surf_ycord // khc * 3], [surf_xcord // kwc + surf_xcord // kwc * (linenumb + 1),
-                                                                        surface_ycord - surf_ycord // khc * 2], 1)
+        LinesDrawer(sce, BLACK, sz_X * (linenumb + 2), sce_Y - sz_Y * 3,  sz_X * (linenumb + 2), sce_Y - sz_Y * 2, 1)
     for linenumb in range(11):
-        pygame.draw.line(surface, BLACK, [surf_xcord // kwc * 1.5 + surf_xcord // kwc * (linenumb + 1),
-                        surface_ycord - surf_ycord // khc * 2], [surf_xcord // kwc * 1.5 + surf_xcord // kwc *
-                                                                 (linenumb + 1), surface_ycord - surf_ycord // khc * 1], 1)
-    pygame.draw.line(surface, BLACK, [surf_xcord // kwc * 5, surface_ycord - surf_ycord // khc],
-                     [surf_xcord // kwc * 5,surface_ycord])
-    pygame.draw.line(surface, BLACK, [surf_xcord // kwc * 10, surface_ycord - surf_ycord // khc],
-                     [surf_xcord // kwc * 10, surface_ycord])
+        LinesDrawer(sce, BLACK, sz_X * (linenumb + 2.5), sce_Y - sz_Y * 2, sz_X * (linenumb + 2.5), sce_Y - sz_Y, 1)
+    LinesDrawer(sce, BLACK, sz_X * 5, sce_Y - sz_Y, sz_X * 5, sce_Y, 1)
+    LinesDrawer(sce, BLACK, sz_X * 10, sce_Y - sz_Y, sz_X * 10, sce_Y, 1)
     for linenumb in range(2):
-        pygame.draw.line(surface, BLACK, [surf_xcord // 3 // 3 * (linenumb + 1), surface_ycord - surf_ycord // 5],
-                         [surf_xcord // 3 // 3 * (linenumb + 1), surface_ycord], 1)
-        pygame.draw.line(surface, BLACK, [surface_xcord - surf_xcord // 9 * (linenumb + 1), surface_ycord - surf_ycord // 5],
-                         [surface_xcord - surf_xcord // 3 // 3 * (linenumb + 1), surface_ycord], 1)
-    pygame.draw.rect(surface, BLACK, (0, surf_info_cordy + surf_input_cordy + surf_text_cordy,
-                                      surf_xcord, surf_ycord), 3)
+        LinesDrawer(sce, BLACK, sf_X // 9 * (linenumb + 1), sce_Y - sf_Y // 5, sf_X // 9 * (linenumb + 1), sce_Y, 1)
+        LinesDrawer(sce, BLACK, sce_X - sf_X // 9 * (linenumb + 1), sce_Y - sf_Y // 5,
+                    sce_X - sf_X // 9 * (linenumb + 1), sce_Y, 1)
+    LinesDrawer(sce, BLACK, 0, sf_inf_Y + sf_inp_Y + sf_txt_Y, sf_X, sf_inf_Y + sf_inp_Y + sf_txt_Y, 3)
 
 def DictOfSymbols(BLACK):
 
@@ -139,7 +129,7 @@ def KeyboardDrawer(surface, surface_xcord, surface_ycord, surf_xcord, surf_ycord
 
     """func draws all the keyboard completely"""
 
-    LineDrawer(surface, surface_xcord, surface_ycord, surf_xcord, surf_ycord, BLACK,
+    FrameDrawer(surface, surface_xcord, surface_ycord, surf_xcord, surf_ycord, BLACK,
                keys_width_counter, keys_height_counter, surf_info_cordy, surf_input_cordy, surf_text_cordy)
     dict = DictOfSymbols(BLACK)
     RusSymbolsDrawer(dict, surf_xcord, surface_ycord, surf_ycord, indent1, indent2,

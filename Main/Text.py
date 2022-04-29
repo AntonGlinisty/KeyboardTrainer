@@ -14,13 +14,13 @@ def ListOfSymbols(text):
     return list
 
 def TextViewer(list, BLACK, surface, surf_text_cordx, surf_info_cordy, surf_input_cordy,
-               surf_text_cordy, indent1, word_counter, WHITE, string_scroller):
+               surf_text_cordy, indent1, word_counter, WHITE, string_scroller, textsize):
 
     """func puts part of the text on the screen"""
 
     pygame.draw.rect(surface, WHITE, [0 + 3, surf_info_cordy + surf_input_cordy + 3,
                                       surf_text_cordx - 6, surf_text_cordy - 6])
-    L1 = pygame.font.SysFont('verdana', 18)
+    L1 = pygame.font.SysFont('verdana', textsize)
     width = 0
     for line_counter in range(5):
         length = 0
