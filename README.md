@@ -1,8 +1,8 @@
-Как запускать:
-git clone https://github.com/AntonGlinisty/KeyboardTrainer.git -b dev
-cd KeyboardTrainer
-cd Main
-python3 keyboard.py
+Как запускать:  
+git clone https://github.com/AntonGlinisty/KeyboardTrainer.git -b dev  
+cd KeyboardTrainer  
+cd Main  
+python3 keyboard.py  
 
 Руководство пользования:
 В верхнем левом углу стартового окна находится шестеренка настроек.
