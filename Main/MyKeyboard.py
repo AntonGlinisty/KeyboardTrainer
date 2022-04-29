@@ -107,40 +107,32 @@ def RusSymbolsDrawer(dict, surf_xcord, surface_ycord, surf_ycord, indent1, inden
 
     """func draws letters in right places on the keyboard"""
 
+    consts = (surface, surf_xcord, surface_ycord, surf_ycord, dict, khc)
     for letnumb in range(12):
-        surface.blit(dict['text' + str((letnumb + 1) * 2 - 1)], (surf_xcord // kwc * 0.5 + surf_xcord // kwc *
-                                            (letnumb + 1) + indent1, surface_ycord - surf_ycord // khc * 4 + indent1))
-        surface.blit(dict['text' + str((letnumb + 1) * 2)], (surf_xcord // kwc * 1.5 + surf_xcord // kwc *
-                                       (letnumb + 1) - indent2, surface_ycord - surf_ycord // khc * 3 - indent2 * 2))
+        Let_Drawer((letnumb + 1) * 2 - 1, consts, indent1, indent1, kwc, 0.5, letnumb + 1, 4)
+        Let_Drawer((letnumb + 1) * 2, consts, -indent2, -indent2 * 2, kwc, 1.5, letnumb + 1, 3)
     for letnumb in range(11):
-        surface.blit(dict['text' + str((12 + letnumb + 1) * 2 - 1)], (surf_xcord // kwc * 1 + surf_xcord // kwc *
-                                            (letnumb + 1) + indent1, surface_ycord - surf_ycord // khc * 3 + indent1))
-        surface.blit(dict['text' + str((12 + letnumb + 1) * 2)], (surf_xcord // kwc * 2 + surf_xcord // kwc *
-                                        (letnumb + 1) - indent2, surface_ycord - surf_ycord // khc * 2 - indent2 * 2))
+        Let_Drawer((12 + letnumb + 1) * 2 - 1, consts, indent1, indent1, kwc, 1, letnumb + 1, 3)
+        Let_Drawer((12 + letnumb + 1) * 2, consts, -indent2, -indent2 * 2, kwc, 2, letnumb + 1, 2)
     for letnumb in range(10):
-        surface.blit(dict['text' + str((23 + letnumb + 1) * 2 - 1)], (surf_xcord // kwc * 1.5 + surf_xcord //
-                                        kwc * (letnumb + 1) + indent1, surface_ycord - surf_ycord // khc * 2 + indent1))
-        surface.blit(dict['text' + str((23 + letnumb + 1) * 2)], (surf_xcord // kwc * 2.5 + surf_xcord //
-                                    kwc * (letnumb + 1) - indent2, surface_ycord - surf_ycord // khc * 1 - indent2 * 2))
+        Let_Drawer((23 + letnumb + 1) * 2 - 1, consts, indent1, indent1, kwc, 1.5, letnumb + 1, 2)
+        Let_Drawer((23 + letnumb + 1) * 2, consts, -indent2, -indent2 * 2, kwc, 2.5, letnumb + 1, 1)
     for letnumb in range(13):
-        surface.blit(dict['text' + str((33 + letnumb + 1) * 2 - 1)], (surf_xcord // kwc * (-1) + surf_xcord //
-                                        kwc * (letnumb + 1) + indent1, surface_ycord - surf_ycord // khc * 5 + indent1))
-        surface.blit(dict['text' + str((33 + letnumb + 1) * 2)], (surf_xcord // kwc * 0 + surf_xcord //
-                                    kwc * (letnumb + 1) - indent2, surface_ycord - surf_ycord // khc * 4 - indent2 * 2))
-    surface.blit(dict['text' + str(93)], (surf_xcord / 100 * 3.5, surface_ycord - surf_ycord // khc * 4 + 18))
-    surface.blit(dict['text' + str(94)], (surf_xcord / 60 * 1.1, surface_ycord - surf_ycord // khc * 3 + 18))
-    surface.blit(dict['text' + str(95)], (surf_xcord / 18 * 1.1, surface_ycord - surf_ycord // khc * 2 + 18))
-    surface.blit(dict['text' + str(96)], (surf_xcord / 25, surface_ycord - surf_ycord // khc * 1 + 15))
-    surface.blit(dict['text' + str(97)], (surf_xcord / 30 * 7.9, surface_ycord - surf_ycord // khc * 1 + 15))
-    surface.blit(dict['text' + str(98)], (surf_xcord / 30 * 20.9, surface_ycord - surf_ycord // khc * 1 + 15))
-    surface.blit(dict['text' + str(99)], (surf_xcord // 30 * 27.8, surface_ycord - surf_ycord // khc * 1 + 15))
-    surface.blit(dict['text' + str(100)], (surf_xcord // kwc * 13.4, surface_ycord - surf_ycord // khc * 2 + 18))
-    surface.blit(dict['text' + str(101)], (surf_xcord // kwc * 13.6, surface_ycord - surf_ycord // khc * 3 + 18))
-    surface.blit(dict['text' + str(102)], (surf_xcord // kwc * 13.6, surface_ycord - surf_ycord // khc * 5 + 18))
-    surface.blit(dict['text' + str(103)], (surf_xcord // kwc * 13.5 + indent1, surface_ycord - surf_ycord //
-                                           khc * 4 + indent1))
-    surface.blit(dict['text' + str(104)], (surf_xcord - indent2, surface_ycord - surf_ycord // khc * 3 - indent2 * 2))
-    surface.blit(dict['text' + str(105)], (surf_xcord / kwc * 6.9, surface_ycord - surf_ycord // khc * 1 + 15))
+        Let_Drawer((33 + letnumb + 1) * 2 - 1, consts, indent1, indent1, kwc, -1, letnumb + 1, 5)
+        Let_Drawer((33 + letnumb + 1) * 2, consts, -indent2, -indent2 * 2, kwc, 0, letnumb + 1, 4)
+    Let_Drawer(93, consts, 0, 18, 100, 0, 3.5, 4)
+    Let_Drawer(94, consts, 0, 18, 60, 0, 1.1, 3)
+    Let_Drawer(95, consts, 0, 18, 18, 0, 1.1, 2)
+    Let_Drawer(96, consts, 0, 15, 25, 0, 1, 1)
+    Let_Drawer(97, consts, 0, 15, 30, 0, 7.9, 1)
+    Let_Drawer(98, consts, 0, 15, 30, 0, 21.3, 1)
+    Let_Drawer(99, consts, 0, 15, 30, 0, 28.3, 1)
+    Let_Drawer(100, consts, 0, 18, kwc, 0, 13.4, 2)
+    Let_Drawer(101, consts, 0, 18, kwc, 0, 13.6, 3)
+    Let_Drawer(102, consts, 0, 18, kwc, 0, 13.6, 5)
+    Let_Drawer(103, consts, indent1, indent1, kwc, 0, 13.5, 4)
+    Let_Drawer(104, consts, -indent2, -indent2 * 2, 1, 0, 1, 3)
+    Let_Drawer(105, consts, 0, 15, kwc, 0, 6.9, 1)
 
 def KeyboardDrawer(surface, surface_xcord, surface_ycord, surf_xcord, surf_ycord, BLACK, indent1, indent2,
                    keys_width_counter, keys_height_counter, surf_info_cordy, surf_input_cordy, surf_text_cordy):
@@ -152,3 +144,10 @@ def KeyboardDrawer(surface, surface_xcord, surface_ycord, surf_xcord, surf_ycord
     dict = DictOfSymbols(BLACK)
     RusSymbolsDrawer(dict, surf_xcord, surface_ycord, surf_ycord, indent1, indent2,
                      keys_width_counter, keys_height_counter, surface)
+
+def Let_Drawer(numb, consts, indent1, indent2, dev1, mult1, mult2, mult3):
+
+    """func draws letters"""
+
+    consts[0].blit(consts[4]['text' + str(numb)], (consts[1] // dev1 * mult1 + consts[1] // dev1 * mult2 + indent1,
+                                                   consts[2] - consts[3] // consts[5] * mult3 + indent2))
