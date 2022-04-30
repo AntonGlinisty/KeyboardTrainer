@@ -195,7 +195,7 @@ if marker6 == False:
 
     TextViewer(list, BLACK, surface, surf_text_cordx, surf_info_cordy, surf_input_cordy, surf_text_cordy, indent1, 0,
                WHITE, string_scroller, ex_text_size)
-
+    dictofcords = DictOfCords(surface_ycord, surf_xcord, surf_ycord, kwc, khc)
     listofpassed = []
 
     while running:
@@ -217,9 +217,8 @@ if marker6 == False:
         if letter not in hot_dict:
             hot_dict[letter] = 0
         if marker1:
-            KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[listofpassed[len(listofpassed) - 2]],
-                            WHITE, surface)
-            KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[letter], GREEN, surface)
+            KeyboardPainter(dictofcords[listofpassed[len(listofpassed) - 2]], WHITE, surface)
+            KeyboardPainter(dictofcords[letter], GREEN, surface)
             marker1 = False
 
         for event in pygame.event.get():
@@ -244,15 +243,13 @@ if marker6 == False:
                         marker2 = False
                     else:
                         counter1 += 1
-                    KeyboardPainter( DictOfCords(surface_ycord, surf_xcord, surf_ycord)
-                                     [listofpassed[len(listofpassed) - 2]], WHITE, surface)
-                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[letter], WHITE, surface)
+                    KeyboardPainter(dictofcords[listofpassed[len(listofpassed) - 2]], WHITE, surface)
+                    KeyboardPainter(dictofcords[letter], WHITE, surface)
                 if condition == 'mistake':
                     hot_dict[letter] += 1
                     mistakes += 1
-                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)
-                                    [listofpassed[len(listofpassed) - 2]], WHITE, surface)
-                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[letter], RED, surface)
+                    KeyboardPainter(dictofcords[listofpassed[len(listofpassed) - 2]], WHITE, surface)
+                    KeyboardPainter(dictofcords[letter], RED, surface)
                     marker1 = False
         if lines_counter >= string_scroller:
             lines_counter = 0
@@ -270,7 +267,6 @@ if marker6 == False:
     print('Heatmap dict : ', sorted_dict)
 
 running = True
-imp_dict = DictOfCords(surface_ycord, surf_xcord, surf_ycord)
 marker8 = True
 
 rock = pygame.image.load(os.path.join(img_folder, 'rock.jpg'))
@@ -283,32 +279,32 @@ if marker7 == False:
             if event.type == pygame.QUIT:
                 running = False
         if marker8:
-            for letter in imp_dict.keys():
+            for letter in dictofcords.keys():
                 if letter not in hot_dict.keys():
-                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[letter], color0, surface)
+                    KeyboardPainter(dictofcords[letter], color0, surface)
             for key, value in hot_dict.items():
                 if value == 0:
-                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color0, surface)
+                    KeyboardPainter(dictofcords[key], color0, surface)
                 if value == 1:
-                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color1, surface)
+                    KeyboardPainter(dictofcords[key], color1, surface)
                 if value == 2:
-                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color2, surface)
+                    KeyboardPainter(dictofcords[key], color2, surface)
                 if value == 3:
-                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color3, surface)
+                    KeyboardPainter(dictofcords[key], color3, surface)
                 if value == 4:
-                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color4, surface)
+                    KeyboardPainter(dictofcords[key], color4, surface)
                 if value == 5:
-                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color5, surface)
+                    KeyboardPainter(dictofcords[key], color5, surface)
                 if value == 6:
-                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color6, surface)
+                    KeyboardPainter(dictofcords[key], color6, surface)
                 if value == 7:
-                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color7, surface)
+                    KeyboardPainter(dictofcords[key], color7, surface)
                 if value == 8:
-                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color8, surface)
+                    KeyboardPainter(dictofcords[key], color8, surface)
                 if value == 9:
-                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color9, surface)
+                    KeyboardPainter(dictofcords[key], color9, surface)
                 if value >= 10:
-                    KeyboardPainter(DictOfCords(surface_ycord, surf_xcord, surf_ycord)[key], color10, surface)
+                    KeyboardPainter(dictofcords[key], color10, surface)
             KeyboardDrawer(surface, surface_xcord, surface_ycord, surf_xcord, surf_ycord, BLACK, indent1, indent2,
                            kwc, khc, surf_info_cordy, surf_input_cordy, surf_text_cordy)
             marker8 = False
