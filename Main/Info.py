@@ -1,49 +1,91 @@
 import pygame
-
+import Globals as glob
 from datetime import datetime
 
-def Info(time, surface, WHITE, surf_info_cordx, surf_info_cordy, word_counter, condition_counter, indent1,
-         indent4, mistakes, marker4, a, BLACK, surface_xcord):
+def Info(time, surface, surf_info_cordx, surf_info_cordy, word_counter, condition_counter,
+         indent, mistakes, marker, timelist, surface_xcord):
 
-    """func displays all statistics in the corresponding area"""
+    """
+    Аргументы:
+    :param time: Время от начала запуска
+    :param surface: Поверхность, на которой отображается статитика
+    :param surf_info_cordx: Ширина поверхности информации
+    :param surf_info_cordy: Высота поверхности информации
+    :param word_counter: Количество набранных слов
+    :param condition_counter: Количество правильно набранных символов
+    :param indent: Отступ
+    :param mistakes: Количество неправильно набранных символов
+    :param: marker: Параматр доступа
+    :param timelist: Список, в который записываются результаты предыдущей попытки
+    :param surface_xcord: Ширина поверхности, на которой отображается статитика
+    :return: Модифицированный список, параметр доступа
 
-    pygame.draw.rect(surface, WHITE, [0 + 3, 3, surf_info_cordx - 6, surf_info_cordy - 6])
-    L1 = pygame.font.SysFont('calibri', 20)
-    if marker4:
-        f = open('stats.txt', 'r+')
-        for lines in f:
-            if len(a) >= 3:
-                break
-            if len(a) < 2:
-                a.append(lines[:-1])
-            elif len(a) == 2:
-                a.append(lines)
-        f.close()
-        marker4 = False
-    text5 = L1.render('Last try results : ', True, (BLACK))
-    surface.blit(text5, (surface_xcord // 18 * 10, indent1 + 15))
-    for l_cou in range(len(a)):
-        text = L1.render(a[l_cou], True, (BLACK))
-        surface.blit(text, (surface_xcord // 30 * 21.5, indent1 + l_cou * 17))
+    Описание: Функция выводит на экран актуальную статистику попытки, а также статистику прошлой попытки
+    """
 
-    text1 = L1.render('Time : ' + str(datetime.now() - time), True, (BLACK))
-    surface.blit(text1, (0 + indent4 // 2, indent1))
+    pygame.draw.rect(surface, glob.WHITE, [glob.stats_area_ind_c, glob.stats_area_ind_c,
+                                surf_info_cordx - glob.stats_area_ind_s, surf_info_cordy - glob.stats_area_ind_s])
+    L1 = pygame.font.SysFont('calibri', glob.stats1_txt_size)
+    if glob.marker4:
+        TimeList(timelist, glob.stats_lines_count)
+        marker = False
+    text5 = L1.render('Last try results : ', True, (glob.BLACK))
+    surface.blit(text5, (surface_xcord // glob.st_ltry_txt_kX * glob.st_ltry_txt_mX, glob.indent1 + glob.st_ltry_txt_kY))
+    for l_cou in range(len(timelist)):
+        text = L1.render(timelist[l_cou], True, (glob.BLACK))
+        surface.blit(text, (surface_xcord // glob.st_ltry_kX * glob.st_ltry_mX, glob.indent1 + l_cou * glob.st_ltry_kY))
+    text1 = L1.render('Time : ' + str(datetime.now() - time), True, (glob.BLACK))
+    surface.blit(text1, (indent // glob.st_time_koef, glob.indent1))
     if (datetime.now() - time).seconds == 0:
-        WPM = 0
-        LPM = 0
+        WPM = LPM = 0
     else:
-        WPM = (word_counter / (datetime.now() - time).seconds * 60)
-        LPM = (condition_counter / ((datetime.now() - time).microseconds / 1000000 +
-                                    (datetime.now() - time).seconds)) * 60
-    text2 = L1.render('Words per minute : ' + str(float("{0:.3f}".format(WPM))), True, (BLACK))
-    surface.blit(text2, (0 + indent4 // 2, indent1 * 7))
-    text3 = L1.render('Symbols per minute : ' + str(float("{0:.3f}".format(LPM))), True, (BLACK))
-    surface.blit(text3, (surf_info_cordx // 4 + indent4, indent1))
-    text4 = L1.render('Mistakes : ' + str(mistakes), True, (BLACK))
-    surface.blit(text4, (surf_info_cordx // 4 + indent4, indent1 * 7))
+        WPM = (word_counter / (datetime.now() - time).seconds * glob.seconds_in_min)
+        LPM = (condition_counter / ((datetime.now() - time).microseconds / glob.micros_in_seconds +
+                                    (datetime.now() - time).seconds)) * glob.seconds_in_min
+    text2 = L1.render('Words per minute : ' + str(float("{0:.3f}".format(WPM))), True, (glob.BLACK))
+    surface.blit(text2, (indent // glob.st_time_koef, glob.indent1 * glob.st_mist_koef))
+    text3 = L1.render('Symbols per minute : ' + str(float("{0:.3f}".format(LPM))), True, (glob.BLACK))
+    surface.blit(text3, (surf_info_cordx // glob.st_mist_ind + indent, glob.indent1))
+    text4 = L1.render('Mistakes : ' + str(mistakes), True, (glob.BLACK))
+    surface.blit(text4, (surf_info_cordx // glob.st_mist_ind + indent, glob.indent1 * glob.st_mist_koef))
+    StatsKeeper(WPM, LPM, mistakes)
+    return timelist, marker
+
+def TimeList(timelist, number):
+
+    """
+    Аргументы:
+    :param timelist: Список, в который записываются результаты предыдущей попытки
+    :param number: Количество полей со статистикой, необходимое для получения
+    :return: Модифицированный список
+
+    Описание: Функция получает статистику предыдущей пыпытки из файла
+    """
+
+    f = open('stats.txt', 'r+')
+    for lines in f:
+        if len(timelist) > number:
+            break
+        if len(timelist) < number:
+            timelist.append(lines[:-1])
+        elif len(timelist) == number:
+            timelist.append(lines)
+    f.close()
+    return timelist
+
+def StatsKeeper(WPM, LPM, mistakes):
+
+    """
+    Аргументы:
+    :param WPM: Words per minute - количество слов в минуту
+    :param LPM: Letters per minute - количество символов в минуту
+    :param mistakes: Количество ошибок
+
+    Описание: Функция записывает статистику попытки в файл
+    """
+
     f = open('stats.txt', 'w+')
     f.write('Words per minute : ' + str(float("{0:.3f}".format(WPM))) + '\n')
     f.write('Symbols per minute : ' + str(float("{0:.3f}".format(LPM))) + '\n')
     f.write('Mistakes : ' + str(mistakes))
     f.close()
-    return a, marker4

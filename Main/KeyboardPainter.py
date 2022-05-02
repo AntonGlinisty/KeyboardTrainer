@@ -1,15 +1,16 @@
 import pygame
+import Globals as glob
 
-def DictOfCords(surface_ycord, surf_xcord, surf_ycord, kwc, khc):
+def DictOfCords(surface_ycord, surf_xcord, surf_ycord):
 
     """
-    Аргументы: Размеры поверхностей, kwc - keys_width_counter - количество клавиш по горизонтали в клавиатуре,
-    khc - keys_height_counter - по вертикали
+    Аргументы: Размеры поверхностей
+
     Описание: Функция возвращает словарь, ключами которого являются символы английской раскладки, а значениями -
     кортежи координат и размеров, соответствующих клавиш на клавиатуре, для последующей покраски этих клавиш
     """
 
-    cords = (surf_xcord, surf_ycord, surface_ycord, kwc, khc)
+    cords = (surf_xcord, surf_ycord, surface_ycord)
     dict = {
         'Q': CordsGet(1.5, 4, cords, 1),  'q': CordsGet(1.5, 4, cords, 1),  'W': CordsGet(2.5, 4, cords, 1),
         'w': CordsGet(2.5, 4, cords, 1),  'E': CordsGet(3.5, 4, cords, 1),  'e': CordsGet(3.5, 4, cords, 1),
@@ -71,9 +72,10 @@ def CordsGet(surf_xc_kf, surf_yc_kf, cords, wid_dev):
     Аргументы:
     :param surf_xc_kf: Множитель отступа по координате X относительно левого края клавиатуры
     :param surf_yc_kf: Множитель отступа по координате Y относительно верхнего края клавиатуры
-    :param cords: Кортеж из размеров поверхностей, относительно которых вычисляются координаты и размеры клавиш и
-    констант, отвечающих за количество клавиш по горизонтали и вертикали в клавиатуре
+    :param cords: Кортеж из размеров поверхностей, относительно которых вычисляются координаты и размеры клавиш
     :param wid_dev: Множитель ширины клавиши
+    :return: Кортеж, в котором на первой позиции координата X верхнего левого угла клавиши, на второй - координата Y,
+    на третьей ширина клавиши, на четвертой - высота. Все координаты и размеры зависят от переданных размеров пов-тей.
 
     Описание: Функция возвращает упакованный кортеж всех необходимых параметров для передачи в функцию KeyboardPainter
     """
@@ -81,8 +83,6 @@ def CordsGet(surf_xc_kf, surf_yc_kf, cords, wid_dev):
     surf_xcord = cords[0]
     surf_ycord = cords[1]
     surface_ycord = cords[2]
-    keys_width_counter = cords[3]
-    keys_height_counter = cords[4]
-    return (surf_xcord / keys_width_counter * surf_xc_kf, surface_ycord - surf_ycord / keys_height_counter * surf_yc_kf,
-            surf_xcord / keys_width_counter * wid_dev, surf_ycord / keys_height_counter),
+    return (surf_xcord / glob.kwc * surf_xc_kf, surface_ycord - surf_ycord / glob.khc * surf_yc_kf,
+            surf_xcord / glob.kwc * wid_dev, surf_ycord / glob.khc),
 

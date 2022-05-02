@@ -1,13 +1,23 @@
 import pygame
 
+import Globals as glob
+
+
 def PrinterSearcher(event, letter):
 
-    """func checks the correspondence of symbols"""
+    """
+    Аргументы:
+    :param event: Вводимый пользователем символ
+    :param letter: Символ, который предстоит напечатать
+    :return: Состояние ввода
+
+    Описание: Функция проверяет правильность введенного пользователем символа
+    """
 
     if event.key not in [pygame.K_LSHIFT, pygame.K_RSHIFT, pygame.K_TAB, pygame.K_CAPSLOCK, pygame.K_LCTRL,
-                    pygame.K_RCTRL, pygame.K_LALT, pygame.K_RALT, pygame.K_PRINTSCREEN] and ord(event.unicode) > 1000:
+            pygame.K_RCTRL, pygame.K_LALT, pygame.K_RALT, pygame.K_PRINTSCREEN] and ord(event.unicode) > glob.un_chec:
         return 'mistake'
-    if pygame.key.get_mods() == 4097 or pygame.key.get_mods() == 12288:
+    if pygame.key.get_mods() == glob.key_mod_u1 or pygame.key.get_mods() == glob.key_mod_u2:
         if (event.key == pygame.K_q and letter == 'Q' or event.key == pygame.K_w and letter == 'W' or
                 event.key == pygame.K_e and letter == 'E' or event.key == pygame.K_r and letter == 'R' or
                 event.key == pygame.K_t and letter == 'T' or event.key == pygame.K_y and letter == 'Y' or
@@ -42,7 +52,7 @@ def PrinterSearcher(event, letter):
             return 'unknown'
         else:
             return 'mistake'
-    if pygame.key.get_mods() == 4096 or pygame.key.get_mods() == 12289:
+    if pygame.key.get_mods() == glob.key_mod_d1 or pygame.key.get_mods() == glob.key_mod_d2:
         if (event.key == pygame.K_q and letter == 'q' or event.key == pygame.K_w and letter == 'w' or
                 event.key == pygame.K_e and letter == 'e' or event.key == pygame.K_r and letter == 'r' or
                 event.key == pygame.K_t and letter == 't' or event.key == pygame.K_y and letter == 'y' or
@@ -78,16 +88,27 @@ def PrinterSearcher(event, letter):
         else:
             return 'mistake'
 
-def PersonInput(width, event, surface, WHITE, listoftw, BLACK, condition, indent1, surf_info_cordy, textsize, indent):
+def PersonInput(width, event, surface, listoftw, condition, surf_info_cordy, textsize):
 
-    """func accepts user input"""
+    """
+    Аргументы:
+    :param width: Отступ относительно уже написанных символов слева
+    :param event: Вводимый пользователем символ
+    :param surface: Поверхность, на которой будет печататься текст
+    :param listoftw: Список размеров уже напечатанных букв для дальнейшего отступа
+    :param condition: Состояние воода ('correct', 'mistake')
+    :param surf_info_cordy: Высота поверхности ввода
+    :param textsize: Размер печатаемого текста
+
+    Описание: Функция печатает пользовательский ввод в соответствующей области
+    """
 
     if condition == 'correct':
         if condition == 'unknown' or condition == 'correct':
             letter = event.unicode
             L1 = pygame.font.SysFont('verdana', textsize)
-            text1 = L1.render(letter, True, (BLACK))
-            surface.blit(text1, (width + indent1, surf_info_cordy + indent))
+            text1 = L1.render(letter, True, (glob.BLACK))
+            surface.blit(text1, (width + glob.indent1, surf_info_cordy + glob.indent3))
             width += text1.get_width()
             listoftw.append(text1.get_width())
     return width, listoftw

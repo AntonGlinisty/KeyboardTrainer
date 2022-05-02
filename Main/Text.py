@@ -1,8 +1,16 @@
 import pygame
+import Globals as glob
+
 
 def ListOfSymbols(text):
 
-    """func reads the text from a file"""
+    """
+    Аргументы:
+    :param text: Название файла с текстом
+    :return: Список всех символов текста
+
+    Описание: Функция читает текст из файла и формирует список из всех его символов
+    """
 
     list = []
     with open(text + '.txt', 'r+', encoding='utf_8') as file:
@@ -13,13 +21,26 @@ def ListOfSymbols(text):
     list = list[:-1]
     return list
 
-def TextViewer(list, BLACK, surface, surf_text_cordx, surf_info_cordy, surf_input_cordy,
-               surf_text_cordy, indent1, word_counter, WHITE, string_scroller, textsize):
+def TextViewer(list, surface, surf_text_cordx, surf_info_cordy, surf_input_cordy, surf_text_cordy, word_counter,
+               string_scroller, textsize):
 
-    """func puts part of the text on the screen"""
+    """
+    Аргументы:
+    :param list: Список всех символов текста
+    :param surface: Поверхность, на которой будет отображаться текст
+    :param surf_text_cordx: Ширина поверхности текста
+    :param surf_info_cordy: Высота поверхности информации
+    :param surf_input_cordy: Высота поверхности ввода
+    :param surf_text_cordy: Высота поверхности текста
+    :param word_counter: Количество уже написанных пользователем слов
+    :param string_scroller: Максимальное количество символов в строке
+    :param textsize: Размер выводимого текста
 
-    pygame.draw.rect(surface, WHITE, [0 + 3, surf_info_cordy + surf_input_cordy + 3,
-                                      surf_text_cordx - 6, surf_text_cordy - 6])
+    Описание: Функция отображает заданное количество строк текста для печати в соответствующей области
+    """
+
+    pygame.draw.rect(surface, glob.WHITE, [0 + glob.txt_area_ind_c, surf_info_cordy + surf_input_cordy +
+            glob.txt_area_ind_c, surf_text_cordx - glob.txt_area_ind_s, surf_text_cordy - glob.txt_area_ind_s])
     L1 = pygame.font.SysFont('verdana', textsize)
     width = 0
     for line_counter in range(5):
@@ -30,12 +51,12 @@ def TextViewer(list, BLACK, surface, surf_text_cordx, surf_info_cordy, surf_inpu
                 break
             length += len(list[word_counter])
             for letter in list[word_counter]:
-                text1 = L1.render(letter, True, (BLACK))
-                surface.blit(text1, (width + indent1, surf_info_cordy + surf_input_cordy +
-                                     surf_text_cordy / 5 * line_counter + 5))
+                text1 = L1.render(letter, True, (glob.BLACK))
+                surface.blit(text1, (width + glob.indent1, surf_info_cordy + surf_input_cordy +
+                                     surf_text_cordy / glob.txt_ind_koef * line_counter + glob.txt_ind_koef))
                 width += text1.get_width()
-            text1 = L1.render(' ', True, (BLACK))
-            surface.blit(text1, (width + indent1, surf_info_cordy + surf_input_cordy +
-                                 surf_text_cordy / 5 * line_counter + 5))
+            text1 = L1.render(' ', True, (glob.BLACK))
+            surface.blit(text1, (width + glob.indent1, surf_info_cordy + surf_input_cordy +
+                                 surf_text_cordy / glob.txt_ind_koef * line_counter + glob.txt_ind_koef))
             width += text1.get_width()
             word_counter += 1
