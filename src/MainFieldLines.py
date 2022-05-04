@@ -1,8 +1,7 @@
 import pygame
-import Globals as glob
+from Globals import *
 
-def BordersDrawer(surface, surf_inf_cX, surf_inp_cX, surf_text_cX, surf_inf_cY, surf_inp_cY, surf_text_cY,
-                  l_l_size, r_l_size, u_l_size, d_l_size):
+def BordersDrawer(surface, surf_inf_cX, surf_inp_cX, surf_text_cX, surf_inf_cY, surf_inp_cY, surf_text_cY):
 
     """
     Аргументы:
@@ -13,28 +12,26 @@ def BordersDrawer(surface, surf_inf_cX, surf_inp_cX, surf_text_cX, surf_inf_cY, 
     :param surf_inf_cY: Высота поверхности статистики
     :param surf_inp_cY: Высота поверхности ввода
     :param surf_text_cY: Высота поверхности текста
-    :param l_l_size: Размер левых линий
-    :param r_l_size: Размер правых линий
-    :param u_l_size: Размер верхних линий
-    :param d_l_size: Размер нижних линий
 
     Описание: Функция рисует линии границы пов-тей(для статистики, ввода, текста и клавиатуры)
     """
 
     cordY = surf_inf_cY + surf_inp_cY
-    LinesDrawer(surface, glob.BLACK, 0, 0, 0, surf_inf_cY, l_l_size)
-    LinesDrawer(surface, glob.BLACK, surf_inf_cX, 0, surf_inf_cX, surf_inf_cY, r_l_size)
-    LinesDrawer(surface, glob.BLACK, 0, u_l_size // 2, surf_inf_cX, u_l_size // 2, u_l_size)
-    LinesDrawer(surface, glob.BLACK, 0, surf_inf_cY - d_l_size // 2 - 1, surf_inf_cX,
-                surf_inf_cY - d_l_size // 2 - 1, d_l_size)
-    LinesDrawer(surface, glob.RED, 0, surf_inf_cY, 0, cordY, l_l_size)
-    LinesDrawer(surface, glob.RED, surf_inf_cX, surf_inf_cY, surf_inp_cX, cordY, r_l_size)
-    LinesDrawer(surface, glob.RED, 0, surf_inf_cY + u_l_size // 2, surf_inp_cX, surf_inp_cY + u_l_size // 2, u_l_size)
-    LinesDrawer(surface, glob.RED, 0, cordY - d_l_size // 2 - 1, surf_inp_cX, cordY - d_l_size // 2 - 1, d_l_size)
-    LinesDrawer(surface, glob.BLACK, 0, cordY, 0, cordY + surf_text_cY, l_l_size)
-    LinesDrawer(surface, glob.BLACK, surf_text_cX, cordY, surf_text_cX, cordY + surf_text_cY, r_l_size)
-    LinesDrawer(surface, glob.BLACK, 0, cordY + u_l_size // 2, surf_text_cX, cordY + u_l_size // 2, u_l_size)
-    LinesDrawer(surface, glob.BLACK, 0, cordY + surf_text_cY, surf_text_cX, cordY + surf_text_cY, d_l_size)
+    LinesDrawer(surface, BLACK, 0, 0, 0, surf_inf_cY, left_line_size)
+    LinesDrawer(surface, BLACK, surf_inf_cX, 0, surf_inf_cX, surf_inf_cY, right_line_size)
+    LinesDrawer(surface, BLACK, 0, up_line_size // 2, surf_inf_cX, up_line_size // 2, up_line_size)
+    LinesDrawer(surface, BLACK, 0, surf_inf_cY - down_line_size // 2 - 1, surf_inf_cX,
+                surf_inf_cY - down_line_size // 2 - 1, down_line_size)
+    LinesDrawer(surface, RED, 0, surf_inf_cY, 0, cordY, left_line_size)
+    LinesDrawer(surface, RED, surf_inf_cX, surf_inf_cY, surf_inp_cX, cordY, right_line_size)
+    LinesDrawer(surface, RED, 0, surf_inf_cY + up_line_size // 2, surf_inp_cX, surf_inp_cY + up_line_size // 2,
+                up_line_size)
+    LinesDrawer(surface, RED, 0, cordY - down_line_size // 2 - 1, surf_inp_cX, cordY - down_line_size // 2 - 1,
+                down_line_size)
+    LinesDrawer(surface, BLACK, 0, cordY, 0, cordY + surf_text_cY, left_line_size)
+    LinesDrawer(surface, BLACK, surf_text_cX, cordY, surf_text_cX, cordY + surf_text_cY, right_line_size)
+    LinesDrawer(surface, BLACK, 0, cordY + up_line_size // 2, surf_text_cX, cordY + up_line_size // 2, up_line_size)
+    LinesDrawer(surface, BLACK, 0, cordY + surf_text_cY, surf_text_cX, cordY + surf_text_cY, down_line_size)
 
 def LinesDrawer(surface, color, l_cordX, l_cordY, r_cordX, r_cordY, size):
 

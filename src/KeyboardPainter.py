@@ -1,5 +1,5 @@
 import pygame
-import Globals as glob
+from Globals import *
 
 def DictOfCords(surface_ycord, surf_xcord, surf_ycord):
 
@@ -83,6 +83,6 @@ def CordsGet(surf_xc_kf, surf_yc_kf, cords, wid_dev):
     surf_xcord = cords[0]
     surf_ycord = cords[1]
     surface_ycord = cords[2]
-    return (surf_xcord / glob.kwc * surf_xc_kf, surface_ycord - surf_ycord / glob.khc * surf_yc_kf,
-            surf_xcord / glob.kwc * wid_dev, surf_ycord / glob.khc),
+    return (surf_xcord / kwc * surf_xc_kf, surface_ycord - surf_ycord / khc * surf_yc_kf,
+            surf_xcord / kwc * wid_dev, surf_ycord / khc),
 

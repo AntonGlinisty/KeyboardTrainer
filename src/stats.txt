@@ -1,0 +1,3 @@
+Words per minute : 45.882
+Symbols per minute : 137.77
+Mistakes : 8
