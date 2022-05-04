@@ -1,9 +1,9 @@
 ## Как запускать:  
 ```
-$ git clone https://github.com/AntonGlinisty/KeyboardTrainer.git -b dev<br/>
-$ cd KeyboardTrainer<br/>
-$ cd Main<br/>
-$ python3 keyboard.py<br/>
+$ git clone https://github.com/AntonGlinisty/KeyboardTrainer.git -b dev
+$ cd KeyboardTrainer
+$ cd Main
+$ python3 keyboard.py
 ```
 
 ## Руководство пользования:
