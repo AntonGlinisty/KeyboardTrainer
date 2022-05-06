@@ -1,57 +1,7 @@
 import pygame
-from Globals import *
+import Globals as glob
+from MyKeyboard import KeyboardDrawer
 
-def DictOfCords(surface_ycord, surf_xcord, surf_ycord):
-
-    """
-    Аргументы: Размеры поверхностей
-
-    Описание: Функция возвращает словарь, ключами которого являются символы английской раскладки, а значениями -
-    кортежи координат и размеров, соответствующих клавиш на клавиатуре, для последующей покраски этих клавиш
-    """
-
-    cords = (surf_xcord, surf_ycord, surface_ycord)
-    dict = {
-        'Q': CordsGet(1.5, 4, cords, 1),  'q': CordsGet(1.5, 4, cords, 1),  'W': CordsGet(2.5, 4, cords, 1),
-        'w': CordsGet(2.5, 4, cords, 1),  'E': CordsGet(3.5, 4, cords, 1),  'e': CordsGet(3.5, 4, cords, 1),
-        'R': CordsGet(4.5, 4, cords, 1),  'r': CordsGet(4.5, 4, cords, 1),  'T': CordsGet(5.5, 4, cords, 1),
-        't': CordsGet(5.5, 4, cords, 1),  'Y': CordsGet(6.5, 4, cords, 1),  'y': CordsGet(6.5, 4, cords, 1),
-        'U': CordsGet(7.5, 4, cords, 1),  'u': CordsGet(7.5, 4, cords, 1),  'I': CordsGet(8.5, 4, cords, 1),
-        'i': CordsGet(8.5, 4, cords, 1),  'O': CordsGet(9.5, 4, cords, 1),  'o': CordsGet(9.5, 4, cords, 1),
-        'P': CordsGet(10.5, 4, cords, 1), 'p': CordsGet(10.5, 4, cords, 1), '{': CordsGet(11.5, 4, cords, 1),
-        '[': CordsGet(11.5, 4, cords, 1), '}': CordsGet(12.5, 4, cords, 1), ']': CordsGet(12.5, 4, cords, 1),
-        'A': CordsGet(2, 3, cords, 1),    'a': CordsGet(2, 3, cords, 1),    'S': CordsGet(3, 3, cords, 1),
-        's': CordsGet(3, 3, cords, 1),    'D': CordsGet(4, 3, cords, 1),    'd': CordsGet(4, 3, cords, 1),
-        'F': CordsGet(5, 3, cords, 1),    'f': CordsGet(5, 3, cords, 1),    'G': CordsGet(6, 3, cords, 1),
-        'g': CordsGet(6, 3, cords, 1),    'H': CordsGet(7, 3, cords, 1),    'h': CordsGet(7, 3, cords, 1),
-        'J': CordsGet(8, 3, cords, 1),    'j': CordsGet(8, 3, cords, 1),    'K': CordsGet(9, 3, cords, 1),
-        'k': CordsGet(9, 3, cords, 1),    'L': CordsGet(10, 3, cords, 1),   'l': CordsGet(10, 3, cords, 1),
-        ':': CordsGet(11, 3, cords, 1),   ';': CordsGet(11, 3, cords, 1),   '"': CordsGet(12, 3, cords, 1),
-        "'": CordsGet(12, 3, cords, 1),   'Z': CordsGet(2.5, 2, cords, 1),  'z': CordsGet(2.5, 2, cords, 1),
-        'X': CordsGet(3.5, 2, cords, 1),  'x': CordsGet(3.5, 2, cords, 1),  'C': CordsGet(4.5, 2, cords, 1),
-        'c': CordsGet(4.5, 2, cords, 1),  'V': CordsGet(5.5, 2, cords, 1),  'v': CordsGet(5.5, 2, cords, 1),
-        'B': CordsGet(6.5, 2, cords, 1),  'b': CordsGet(6.5, 2, cords, 1),  'N': CordsGet(7.5, 2, cords, 1),
-        'n': CordsGet(7.5, 2, cords, 1),  'M': CordsGet(8.5, 2, cords, 1),  'm': CordsGet(8.5, 2, cords, 1),
-        '<': CordsGet(9.5, 2, cords, 1),  ',': CordsGet(9.5, 2, cords, 1),  '>': CordsGet(10.5, 2, cords, 1),
-        '.': CordsGet(10.5, 2, cords, 1), '?': CordsGet(11.5, 2, cords, 1), '/': CordsGet(11.5, 2, cords, 1),
-        '~': CordsGet(0, 5, cords, 1),    '`': CordsGet(0, 5, cords, 1),    '!': CordsGet(1, 5, cords, 1),
-        '1': CordsGet(1, 5, cords, 1),    '@': CordsGet(2, 5, cords, 1),    '2': CordsGet(2, 5, cords, 1),
-        '#': CordsGet(3, 5, cords, 1),    '3': CordsGet(3, 5, cords, 1),    '$': CordsGet(4, 5, cords, 1),
-        '4': CordsGet(4, 5, cords, 1),    '%': CordsGet(5, 5, cords, 1),    '5': CordsGet(5, 5, cords, 1),
-        '^': CordsGet(6, 5, cords, 1),    '6': CordsGet(6, 5, cords, 1),    '&': CordsGet(7, 5, cords, 1),
-        '7': CordsGet(7, 5, cords, 1),    '*': CordsGet(8, 5, cords, 1),    '8': CordsGet(8, 5, cords, 1),
-        '(': CordsGet(9, 5, cords, 1),    '9': CordsGet(9, 5, cords, 1),    ')': CordsGet(10, 5, cords, 1),
-        '0': CordsGet(10, 5, cords, 1),   '_': CordsGet(11, 5, cords, 1),   '-': CordsGet(11, 5, cords, 1),
-        '+': CordsGet(12, 5, cords, 1),   '=': CordsGet(12, 5, cords, 1),
-        '|': CordsGet(13.5, 4, cords, 1.6), '\\': CordsGet(13.5, 4, cords, 1.6),
-        'Enter': CordsGet(13, 3, cords, 2), 'Space': CordsGet(5, 1, cords, 5),
-        'LCtrl': CordsGet(0, 1, cords, 15 / 9), 'LShift': CordsGet(0, 2, cords, 2.5),
-        'Caps Lock': CordsGet(0, 3, cords, 2), 'Tab': CordsGet(0, 4, cords, 1.5),
-        'Alt': CordsGet(30 / 9, 1, cords, 15 / 9), 'AltGr': CordsGet(10, 1, cords, 15 / 9),
-        'RCtrl': CordsGet(40 / 3, 1, cords, 15 / 9), 'RShift': CordsGet(12.5, 2, cords, 15 / 5),
-        'Backspace': CordsGet(13, 5, cords, 15 / 2),
-    }
-    return dict
 
 def KeyboardPainter(tuple, color, surface):
 
@@ -83,6 +33,67 @@ def CordsGet(surf_xc_kf, surf_yc_kf, cords, wid_dev):
     surf_xcord = cords[0]
     surf_ycord = cords[1]
     surface_ycord = cords[2]
-    return (surf_xcord / kwc * surf_xc_kf, surface_ycord - surf_ycord / khc * surf_yc_kf,
-            surf_xcord / kwc * wid_dev, surf_ycord / khc),
+    return (surf_xcord / glob.kwc * surf_xc_kf, surface_ycord - surf_ycord / glob.khc * surf_yc_kf,
+            surf_xcord / glob.kwc * wid_dev, surf_ycord / glob.khc),
 
+def AllKeysPainter(dictofcords, hot_dict, surface):
+
+    """
+    Аргументы:
+    :param dictofcords: Словарь со значениями - координатами клавиш
+    :param hot_dict: Словарь, ключами которого являются названия клавиш, при нажатии на которые пользователь ошибался,
+    а значениями - количество ошибок
+    :param surface: Основная поверхность
+
+    Описание: Функция рисует hetmap - клавиатуру
+    """
+
+    for letter in dictofcords.keys():
+        if letter not in hot_dict.keys():
+            KeyboardPainter(dictofcords[letter], glob.color['color0'], surface)
+    for key, value in hot_dict.items():
+        for i in range(0, glob.maxbrht):
+            if value == i:
+                KeyboardPainter(dictofcords[key], glob.color['color' + str(i)], surface)
+        if value >= glob.maxbrht:
+            KeyboardPainter(dictofcords[key], glob.color['color' + str(glob.maxbrht)], surface)
+    KeyboardDrawer(surface)
+
+def ConditionChanger(condition, dictofcords, listofpassed, letter, surface, hot_dict, list):
+    """
+    Аргументы:
+    :param condition: Состояние ввода
+    :param dictofcords: Словарь со значениями - координатами клавиш
+    :param listofpassed: Список уже напечатанных символов
+    :param letter: Буква, которую предстоит напечатать
+    :param surface: Основная поверхность
+    :param hot_dict: Словарь, ключами которого являются названия клавиш, при нажатии на которые пользователь ошибался,
+    а значениями - количество ошибок
+    :param list: Список всех символом текста
+
+    Описание: Функция отслеживает состояние воода и, в зависимости от него, изменяет счетчики(ошибок, правильно
+    напечатанных символов, ...)
+    """
+    if condition == 'correct':
+        glob.condition_counter += 1
+        if glob.marker1 == False:
+            glob.marker1 = True
+        if glob.marker2 == False:
+            glob.marker2 = True
+        if glob.counter1 == len(list[glob.counter2]) - 1 or letter == 'Enter':
+            glob.word_counter += 1
+            glob.lines_counter += len(list[glob.counter2])
+            glob.counter1 = -1
+            glob.counter2 += 1
+            glob.marker2 = False
+        else:
+            glob.counter1 += 1
+        KeyboardPainter(dictofcords[listofpassed[len(listofpassed) - glob.dct_ind]], glob.WHITE, surface)
+        KeyboardPainter(dictofcords[letter], glob.WHITE, surface)
+    if condition == 'mistake':
+        hot_dict[letter] += 1
+        glob.mistakes += 1
+        KeyboardPainter(dictofcords[listofpassed[len(listofpassed) - glob.dct_ind]], glob.WHITE, surface)
+        KeyboardPainter(dictofcords[letter], glob.RED, surface)
+        glob.marker1 = False
+    return hot_dict

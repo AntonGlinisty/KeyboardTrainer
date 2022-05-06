@@ -1,5 +1,5 @@
 import pygame
-from Globals import *
+import Globals as glob
 
 def BordersDrawer(surface, surf_inf_cX, surf_inp_cX, surf_text_cX, surf_inf_cY, surf_inp_cY, surf_text_cY):
 
@@ -17,21 +17,22 @@ def BordersDrawer(surface, surf_inf_cX, surf_inp_cX, surf_text_cX, surf_inf_cY, 
     """
 
     cordY = surf_inf_cY + surf_inp_cY
-    LinesDrawer(surface, BLACK, 0, 0, 0, surf_inf_cY, left_line_size)
-    LinesDrawer(surface, BLACK, surf_inf_cX, 0, surf_inf_cX, surf_inf_cY, right_line_size)
-    LinesDrawer(surface, BLACK, 0, up_line_size // 2, surf_inf_cX, up_line_size // 2, up_line_size)
-    LinesDrawer(surface, BLACK, 0, surf_inf_cY - down_line_size // 2 - 1, surf_inf_cX,
-                surf_inf_cY - down_line_size // 2 - 1, down_line_size)
-    LinesDrawer(surface, RED, 0, surf_inf_cY, 0, cordY, left_line_size)
-    LinesDrawer(surface, RED, surf_inf_cX, surf_inf_cY, surf_inp_cX, cordY, right_line_size)
-    LinesDrawer(surface, RED, 0, surf_inf_cY + up_line_size // 2, surf_inp_cX, surf_inp_cY + up_line_size // 2,
-                up_line_size)
-    LinesDrawer(surface, RED, 0, cordY - down_line_size // 2 - 1, surf_inp_cX, cordY - down_line_size // 2 - 1,
-                down_line_size)
-    LinesDrawer(surface, BLACK, 0, cordY, 0, cordY + surf_text_cY, left_line_size)
-    LinesDrawer(surface, BLACK, surf_text_cX, cordY, surf_text_cX, cordY + surf_text_cY, right_line_size)
-    LinesDrawer(surface, BLACK, 0, cordY + up_line_size // 2, surf_text_cX, cordY + up_line_size // 2, up_line_size)
-    LinesDrawer(surface, BLACK, 0, cordY + surf_text_cY, surf_text_cX, cordY + surf_text_cY, down_line_size)
+    LinesDrawer(surface, glob.BLACK, 0, 0, 0, surf_inf_cY, glob.left_line_size)
+    LinesDrawer(surface, glob.BLACK, surf_inf_cX, 0, surf_inf_cX, surf_inf_cY, glob.right_line_size)
+    LinesDrawer(surface, glob.BLACK, 0, glob.up_line_size // 2, surf_inf_cX, glob.up_line_size // 2, glob.up_line_size)
+    LinesDrawer(surface, glob.BLACK, 0, surf_inf_cY - glob.down_line_size // 2 - 1, surf_inf_cX,
+                surf_inf_cY - glob.down_line_size // 2 - 1, glob.down_line_size)
+    LinesDrawer(surface, glob.RED, 0, surf_inf_cY, 0, cordY, glob.left_line_size)
+    LinesDrawer(surface, glob.RED, surf_inf_cX, surf_inf_cY, surf_inp_cX, cordY, glob.right_line_size)
+    LinesDrawer(surface, glob.RED, 0, surf_inf_cY + glob.up_line_size // 2, surf_inp_cX,
+                surf_inp_cY + glob.up_line_size // 2, glob.up_line_size)
+    LinesDrawer(surface, glob.RED, 0, cordY - glob.down_line_size // 2 - 1, surf_inp_cX,
+                cordY - glob.down_line_size // 2 - 1, glob.down_line_size)
+    LinesDrawer(surface, glob.BLACK, 0, cordY, 0, cordY + surf_text_cY, glob.left_line_size)
+    LinesDrawer(surface, glob.BLACK, surf_text_cX, cordY, surf_text_cX, cordY + surf_text_cY, glob.right_line_size)
+    LinesDrawer(surface, glob.BLACK, 0, cordY + glob.up_line_size // 2, surf_text_cX, cordY + glob.up_line_size // 2,
+                glob.up_line_size)
+    LinesDrawer(surface, glob.BLACK, 0, cordY + surf_text_cY, surf_text_cX, cordY + surf_text_cY, glob.down_line_size)
 
 def LinesDrawer(surface, color, l_cordX, l_cordY, r_cordX, r_cordY, size):
 

@@ -21,17 +21,12 @@ def ListOfSymbols(text):
     list = list[:-1]
     return list
 
-def TextViewer(list, surface, surf_text_cordx, surf_info_cordy, surf_input_cordy, surf_text_cordy, word_counter,
-               string_scroller, textsize):
+def TextViewer(list, surface, word_counter, string_scroller, textsize):
 
     """
     Аргументы:
     :param list: Список всех символов текста
     :param surface: Поверхность, на которой будет отображаться текст
-    :param surf_text_cordx: Ширина поверхности текста
-    :param surf_info_cordy: Высота поверхности информации
-    :param surf_input_cordy: Высота поверхности ввода
-    :param surf_text_cordy: Высота поверхности текста
     :param word_counter: Количество уже написанных пользователем слов
     :param string_scroller: Максимальное количество символов в строке
     :param textsize: Размер выводимого текста
@@ -39,8 +34,8 @@ def TextViewer(list, surface, surf_text_cordx, surf_info_cordy, surf_input_cordy
     Описание: Функция отображает заданное количество строк текста для печати в соответствующей области
     """
 
-    pygame.draw.rect(surface, glob.WHITE, [0 + glob.txt_area_ind_c, surf_info_cordy + surf_input_cordy +
-            glob.txt_area_ind_c, surf_text_cordx - glob.txt_area_ind_s, surf_text_cordy - glob.txt_area_ind_s])
+    pygame.draw.rect(surface, glob.WHITE, [0 + glob.txt_area_ind_c, glob.surf_info_cordy + glob.surf_input_cordy +
+            glob.txt_area_ind_c, glob.surf_text_cordx - glob.txt_area_ind_s, glob.surf_text_cordy - glob.txt_area_ind_s])
     L1 = pygame.font.SysFont('verdana', textsize)
     width = 0
     for line_counter in range(5):
@@ -52,11 +47,11 @@ def TextViewer(list, surface, surf_text_cordx, surf_info_cordy, surf_input_cordy
             length += len(list[word_counter])
             for letter in list[word_counter]:
                 text1 = L1.render(letter, True, (glob.BLACK))
-                surface.blit(text1, (width + glob.indent1, surf_info_cordy + surf_input_cordy +
-                                     surf_text_cordy / glob.txt_ind_koef * line_counter + glob.txt_ind_koef))
+                surface.blit(text1, (width + glob.indent1, glob.surf_info_cordy + glob.surf_input_cordy +
+                                     glob.surf_text_cordy / glob.txt_ind_koef * line_counter + glob.txt_ind_koef))
                 width += text1.get_width()
             text1 = L1.render(' ', True, (glob.BLACK))
-            surface.blit(text1, (width + glob.indent1, surf_info_cordy + surf_input_cordy +
-                                 surf_text_cordy / glob.txt_ind_koef * line_counter + glob.txt_ind_koef))
+            surface.blit(text1, (width + glob.indent1, glob.surf_info_cordy + glob.surf_input_cordy +
+                                 glob.surf_text_cordy / glob.txt_ind_koef * line_counter + glob.txt_ind_koef))
             width += text1.get_width()
             word_counter += 1

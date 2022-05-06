@@ -154,17 +154,14 @@ def SmallSymbChecker(event, letter):
     else:
         return False
 
-def PersonInput(width, event, surface, listoftw, condition, surf_info_cordy, textsize):
+def PersonInput(event, surface, listoftw, condition):
 
     """
     Аргументы:
-    :param width: Отступ относительно уже написанных символов слева
     :param event: Вводимый пользователем символ
     :param surface: Поверхность, на которой будет печататься текст
     :param listoftw: Список размеров уже напечатанных букв для дальнейшего отступа
     :param condition: Состояние воода ('correct', 'mistake')
-    :param surf_info_cordy: Высота поверхности ввода
-    :param textsize: Размер печатаемого текста
 
     Описание: Функция печатает пользовательский ввод в соответствующей области
     """
@@ -172,9 +169,9 @@ def PersonInput(width, event, surface, listoftw, condition, surf_info_cordy, tex
     if condition == 'correct':
         if condition == 'unknown' or condition == 'correct':
             letter = event.unicode
-            L1 = pygame.font.SysFont('verdana', textsize)
+            L1 = pygame.font.SysFont('verdana', glob.ex_text_size)
             text1 = L1.render(letter, True, (glob.BLACK))
-            surface.blit(text1, (width + glob.indent1, surf_info_cordy + glob.indent3))
-            width += text1.get_width()
+            surface.blit(text1, (glob.width + glob.indent1, glob.surf_info_cordy + glob.indent3))
+            glob.width += text1.get_width()
             listoftw.append(text1.get_width())
-    return width, listoftw
+    return listoftw
