@@ -2,7 +2,7 @@
 ```
 $ git clone https://github.com/AntonGlinisty/KeyboardTrainer.git
 $ cd KeyboardTrainer
-$ cd src
+$ pip install -r requirements.txt
 $ python3 keyboard.py
 ```
 ___
